@@ -16,11 +16,12 @@ import java.awt.event.MouseMotionListener;
 public class MouseManager implements MouseListener, MouseMotionListener{
     private boolean izquierdo;
     private boolean derecho;
+    private Game game;
     private int x;
     private int y;
     
-    public MouseManager(){
-        
+    public MouseManager(Game game){
+        this.game = game;
     }
     
     public boolean isIzquierdo(){
@@ -82,9 +83,16 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        
+            x = e.getX();
+            y = e.getY();
+        
+        if(x >= game.getBall().getX() && x <= game.getBall().getX()+50
+                && y >= game.getBall().getY() && y <= game.getBall().getY()+50){
             izquierdo = true;
             x = e.getX();
             y = e.getY();
+        }
     }
 
     @Override

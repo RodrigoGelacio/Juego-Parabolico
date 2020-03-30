@@ -79,6 +79,7 @@ public class Ball extends Item {
         if (game.getMouseManager().isIzquierdo()) {
             setX(game.getMouseManager().getX());
             setY(game.getMouseManager().getY());
+            
         }
        
         

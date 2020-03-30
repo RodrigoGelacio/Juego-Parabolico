@@ -44,14 +44,14 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        mouseManager = new MouseManager();
+        mouseManager = new MouseManager(this);
     }
 
     /**
      * 
      * @return player
      */
-    public Ball getPlayer() {
+    public Ball getBall() {
         return ball;
     }
     
