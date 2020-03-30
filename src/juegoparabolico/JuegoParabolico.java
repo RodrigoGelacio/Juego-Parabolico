@@ -15,7 +15,7 @@ public class JuegoParabolico {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Game g = new Game("Juego", 1200, 600);
+        Game g = new Game("Juego", 950, 600);
         g.start();
     }
     

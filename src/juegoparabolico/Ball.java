@@ -103,13 +103,17 @@ public class Ball extends Item {
 
         // if it hits a wall, it bounces in the opposite direction by pressing 
         //virtually a button.
-        if (getX() + 60 >= game.getWidth()) {
+        if (getX() + 40 >= game.getWidth()) {
             setX(game.getWidth()/2 - (getWidth()/2));
             setY(game.getHeight()/2);
             control = false;
             barrier = 300;
         }
-        if (getY() + 80 >= game.getHeight()) {
+        else if(getX() < 0){
+            setX(0);
+        }
+            
+        if (getY() + 40 >= game.getHeight()) {
             setX(game.getWidth()/2 - (getWidth()/2));
             setY(game.getHeight()/2);
             control = false;
