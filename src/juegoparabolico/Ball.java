@@ -63,18 +63,8 @@ public class Ball extends Item {
         
         if(!game.getMouseManager().isIzquierdo()){
             if(getX() <= barrier){
-                System.out.println("hola");
-                if(getX() <= 100){
-                    velocityX = 5;
-                }
-                else if(getX() <= 200 && getX() > 100){
-                    velocityX = 4;
-                }
-                else if(getX() <= 300 && getX() > 200){
-                    velocityX = 3;
-                }
-                else{
-                   velocityX = 0;
+                if(getX() <= 300){
+                    velocityX = (300 - getX())/50;
                 }
                 
                 initialTime = System.nanoTime() - 1000000000;
@@ -113,6 +103,23 @@ public class Ball extends Item {
 
         // if it hits a wall, it bounces in the opposite direction by pressing 
         //virtually a button.
+        if (getX() + 60 >= game.getWidth()) {
+            setX(game.getWidth()/2 - (getWidth()/2));
+            setY(game.getHeight()/2);
+            control = false;
+            barrier = 300;
+        }
+        if (getY() + 80 >= game.getHeight()) {
+            setX(game.getWidth()/2 - (getWidth()/2));
+            setY(game.getHeight()/2);
+            control = false;
+            barrier = 300;
+        } else if (getY() <= 0) {
+            setX(game.getWidth()/2 - (getWidth()/2));
+            setY(game.getHeight()/2);
+            control = false;
+            barrier = 300;
+        }
         
     }
 
