@@ -24,12 +24,19 @@ public class Ball extends Item {
     private double velocityYFinal;
     private double gravity;
     private int barrier;
+    private int frames;
+    private int rotationNumber;
     private boolean control;
     private long initialTime;
     private long nowTime;
     private long trueTime;
     private boolean controlGravity;
     private int enter;
+    private Animation animationRotation1;
+    private Animation animationRotation2;
+    private Animation animationRotation3;
+    private Animation animationRotation4;
+    private Animation animationRotation5;
 
     public Ball(int x, int y, int direction, int width, int height, Game game, int counter) {
         super(x, y, width, height);
@@ -47,6 +54,13 @@ public class Ball extends Item {
         control = false;
         controlGravity = false;
         enter = 0;
+        frames = 0;
+        rotationNumber = 1;
+        this.animationRotation1 = new Animation(Assets.rotation1, 100);
+        this.animationRotation2 = new Animation(Assets.rotation2, 100);
+        this.animationRotation3 = new Animation(Assets.rotation3, 100);
+        this.animationRotation4 = new Animation(Assets.rotation4, 100);
+        this.animationRotation5 = new Animation(Assets.rotation4, 100);
     }
 
     public int getDirection() {
@@ -60,6 +74,27 @@ public class Ball extends Item {
     @Override
     public void tick() {
         // moving player depending on flags and velocity
+        this.animationRotation1.tick();
+        this.animationRotation2.tick();
+        this.animationRotation3.tick();
+        this.animationRotation4.tick();
+        this.animationRotation5.tick();
+    
+        System.out.println(frames);
+        frames++;
+        if(frames == 135){
+        rotationNumber = 2;
+    } /* else if (frames == 224){
+        rotationNumber = 3;
+    }  else if (frames == 336){
+        rotationNumber = 4;
+    } else if(frames == 448){
+        rotationNumber = 5;
+    } else if(frames == 560){
+        rotationNumber = 1;
+        frames = 0;
+    } */
+       
         
         if(!game.getMouseManager().isIzquierdo()){
             if(getX() <= barrier){
@@ -87,7 +122,7 @@ public class Ball extends Item {
             setX(getX() + velocityX);
             
             
-            System.out.println((System.nanoTime() - initialTime) / 1000000000);
+//            System.out.println((System.nanoTime() - initialTime) / 1000000000);
             velocityYFinal = velocityYInitial - gravity* ((System.nanoTime() - initialTime)/1000000000);
             velocityYInitial = velocityYFinal;
             
@@ -130,7 +165,24 @@ public class Ball extends Item {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        switch(rotationNumber){
+            case 1:
+                g.drawImage(animationRotation1.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 2:
+                g.drawImage(animationRotation2.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 3:
+                g.drawImage(animationRotation3.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 4:
+                g.drawImage(animationRotation4.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case 5:
+                g.drawImage(animationRotation5.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+        }
+        
     }
 }
 
