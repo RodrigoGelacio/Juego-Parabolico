@@ -83,14 +83,14 @@ public class Ball extends Item {
         System.out.println(frames);
         frames++;
         if(frames == 135){
-        rotationNumber = 2;
-    } /* else if (frames == 224){
+    //    rotationNumber = 2;
+    } /* else if (frames == 270){
         rotationNumber = 3;
-    }  else if (frames == 336){
+    }  else if (frames == 405){
         rotationNumber = 4;
-    } else if(frames == 448){
+    } else if(frames == 540){
         rotationNumber = 5;
-    } else if(frames == 560){
+    } else if(frames == 675){
         rotationNumber = 1;
         frames = 0;
     } */

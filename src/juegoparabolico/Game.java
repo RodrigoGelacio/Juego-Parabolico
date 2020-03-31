@@ -25,7 +25,8 @@ public class Game implements Runnable {
     private int height;             // height of the window
     private Thread thread;          // thread to create the game
     private boolean running;        // to set the game
-    private Ball ball;  // to use a player
+    private Ball ball;              // to use a player
+    private Canasta basket;
     private KeyManager keyManager;  // to manage the keyboard
     private MouseManager mouseManager;
     private Timer timer;
@@ -83,7 +84,8 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth()/2, getHeight()/2, 1, 50, 50, this,1);       
+        ball = new Ball(getWidth()/2, getHeight()/2, 1, 50, 50, this,1);
+        basket = new Canasta(getWidth() - 100, getHeight() - 100, 100, 100, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
@@ -131,7 +133,7 @@ public class Game implements Runnable {
         keyManager.tick();
         // avancing player with colision
         ball.tick();
-
+        basket.tick();
     }
 
     private void render() {
@@ -149,6 +151,7 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
             ball.render(g);
+            basket.render(g);
             bs.show();
             g.dispose();
         }
