@@ -21,7 +21,7 @@ public class KeyManager implements KeyListener {
     public boolean right;   // flag to move right the player
     public int verticalSpeed; // velocity for the vertical buttons
     public int horizontalSpeed; // velocity for the horizontal button
-    public boolean control; // controls the copy of velocities.
+    public boolean paused; // flag pause the game
 
     private boolean keys[];  // to store all the flags for every key
 
@@ -29,9 +29,14 @@ public class KeyManager implements KeyListener {
         keys = new boolean[256];
         verticalSpeed = 0;
         horizontalSpeed = 0;
-        control = true;
+        paused = true;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
+    
     @Override
 
     public void keyTyped(KeyEvent e) {
@@ -60,7 +65,9 @@ public class KeyManager implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // set false to every key released
          keys[e.getKeyCode()] = false;
-
+         if(e.getKeyCode() == KeyEvent.VK_P){
+             paused = !paused;
+         }
     }
 
     /**

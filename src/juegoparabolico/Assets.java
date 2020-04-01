@@ -16,6 +16,7 @@ public class Assets {
     public static BufferedImage background; // to store background image
     public static BufferedImage player;     // to store the player image
     public static BufferedImage sprite;
+    public static BufferedImage pause;
     public static BufferedImage spriteBasket;
     public static BufferedImage rotation1[];
     public static BufferedImage rotation2[];
@@ -29,6 +30,7 @@ public static BufferedImage portal[];
     public static void init() {
         background = ImageLoader.loadImage("/images/park.png");
         player = ImageLoader.loadImage("/images/ball.png");
+        pause = ImageLoader.loadImage("/images/pause.jpg");
         sprite = ImageLoader.loadImage("/images/coin1.png");
         spriteBasket = ImageLoader.loadImage("/images/fountain.png");
         Spritesheet spritesheet = new Spritesheet(sprite);
