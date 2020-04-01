@@ -55,6 +55,11 @@ public class Ball extends Item {
         this.animationRotation1 = new Animation(Assets.rotation1, 100);
     }
 
+    public void setBarrier(int barrier) {
+        this.barrier = barrier;
+    }
+    
+
     public void setControl(boolean control) {
         this.control = control;
     }

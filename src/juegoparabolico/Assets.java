@@ -17,20 +17,23 @@ public class Assets {
     public static BufferedImage player;     // to store the player image
     public static BufferedImage sprite;
     public static BufferedImage pause;
+    public static BufferedImage gameOver;
     public static BufferedImage spriteBasket;
     public static BufferedImage rotation1[];
-    public static BufferedImage rotation2[];
-    public static BufferedImage rotation3[];
-    public static BufferedImage rotation4[];
-    public static BufferedImage rotation5[];
+    public static SoundClip score;
+    public static SoundClip music;
+    
 public static BufferedImage portal[];
     /**
      * initializing the images of the game
      */
     public static void init() {
+        music = new SoundClip("/sounds/guitarMusic.wav");
+        score = new SoundClip("/sounds/score.wav");
         background = ImageLoader.loadImage("/images/park.png");
         player = ImageLoader.loadImage("/images/ball.png");
         pause = ImageLoader.loadImage("/images/pause.jpg");
+        gameOver = ImageLoader.loadImage("/images/gameover.jpg");
         sprite = ImageLoader.loadImage("/images/coin1.png");
         spriteBasket = ImageLoader.loadImage("/images/fountain.png");
         Spritesheet spritesheet = new Spritesheet(sprite);

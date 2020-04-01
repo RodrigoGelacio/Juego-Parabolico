@@ -9,6 +9,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -50,7 +55,7 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         running = false;
-        keyManager = new KeyManager();
+        keyManager = new KeyManager(this);
         mouseManager = new MouseManager(this);
         score = 0;
         vidas = 5;
@@ -117,7 +122,8 @@ public class Game implements Runnable {
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-        
+        Assets.music.setLooping(true);
+        Assets.music.play();
     }
 
     @Override
@@ -144,7 +150,9 @@ public class Game implements Runnable {
             // if delta is positive we tick the game
             if (delta >= 1) {
                 if(keyManager.isPaused()){
-                tick();
+                    if(vidas != 0){
+                        tick();
+                    }
                 }
                 render();
                 delta--;
@@ -165,13 +173,15 @@ public class Game implements Runnable {
         if(basket.collision(ball)){
             score += 10;
             ball.setControl(false);
+            ball.setBarrier(300);
             ball.setX(getWidth()/2);
             ball.setY(getHeight()/2);
+            scoreSound();
         }
         if(counterVidas == 3){
             vidas--;
             counterVidas = 0;
-    }
+        }
         
         if(score % 50 == 0 && score != 0 && !vidaAsignada){
             extraVida = true;
@@ -212,12 +222,20 @@ public class Game implements Runnable {
             if(!keyManager.isPaused()){
                 g.drawImage(Assets.pause, 0, 0, width, height, null);
             }
+            if(vidas == 0){
+                g.drawImage(Assets.gameOver, 0, 0, width, height, null);
+                Assets.music.stop();    
+            }
             bs.show();
             g.dispose();
         }
 
     }
-
+    
+    public void scoreSound(){
+        Assets.score.play();
+    }
+    
     /**
      * setting the thead for the game
      */
@@ -240,6 +258,46 @@ public class Game implements Runnable {
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
+        }
+    }
+    
+    public void Save(String strFileName) {
+
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter(strFileName));
+            int x = ball.getX();
+            int y = ball.getY();
+            //save player data
+            writer.println("" + vidas + "/" + score + "/" + x + "/" + y);
+            writer.close();
+
+        } catch (IOException ioe) {
+            System.out.println("File Not found CALL 911");
+        }
+
+    }
+
+    //Save Enemies
+
+    public void Load(String strFileName) {
+        try {
+            FileReader file = new FileReader(strFileName);
+            BufferedReader reader = new BufferedReader(file);
+            String line;
+            String datos[];
+            line = reader.readLine();
+            datos = line.split("/");
+            vidas = Integer.parseInt(datos[0]);
+            score = Integer.parseInt(datos[1]);
+            //Load Player
+            int x = Integer.parseInt(datos[2]);
+            int y = Integer.parseInt(datos[3]);
+            System.out.println("Se leyo  vidas = " + vidas + " y score = " + score + " y X = " + x + " y Y = " + y);
+            ball.setX(x);
+            ball.setY(y);
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("File Not found CALL 911");
         }
     }
 

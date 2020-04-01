@@ -15,21 +15,16 @@ import java.awt.event.KeyListener;
  */
 public class KeyManager implements KeyListener {
 
-    public boolean up;      // flag to move up the player
-    public boolean down;    // flag to move down the player
-    public boolean left;    // flag to move left the player
-    public boolean right;   // flag to move right the player
-    public int verticalSpeed; // velocity for the vertical buttons
-    public int horizontalSpeed; // velocity for the horizontal button
     public boolean paused; // flag pause the game
+    public boolean save;
+    private Game game;
 
     private boolean keys[];  // to store all the flags for every key
 
-    public KeyManager() {
+    public KeyManager(Game game) {
         keys = new boolean[256];
-        verticalSpeed = 0;
-        horizontalSpeed = 0;
         paused = true;
+        this.game = game;
     }
 
     public boolean isPaused() {
@@ -52,7 +47,12 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
-
+        if(e.getKeyCode() == KeyEvent.VK_S){
+            game.Save("game");
+        }
+        if(e.getKeyCode() == KeyEvent.VK_C){
+            game.Load("game");
+        }
     }
 
     /**
@@ -68,12 +68,12 @@ public class KeyManager implements KeyListener {
          if(e.getKeyCode() == KeyEvent.VK_P){
              paused = !paused;
          }
+         
     }
 
     /**
      * to enable or disable moves on every tick
      */
     public void tick() {
-        
     }
 }
