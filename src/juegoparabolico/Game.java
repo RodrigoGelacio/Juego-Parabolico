@@ -34,6 +34,9 @@ public class Game implements Runnable {
     private TimerTask task;
     private int score;
     private int vidas;
+    private int counterVidas;
+    private boolean extraVida;
+    private boolean vidaAsignada;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -51,16 +54,26 @@ public class Game implements Runnable {
         mouseManager = new MouseManager(this);
         score = 0;
         vidas = 5;
+        extraVida = false;
+        vidaAsignada = false;
+    }
+
+    public int getCounterVidas() {
+        return counterVidas;
     }
 
     /**
      * 
-     * @return player
+     * @return ball
      */
     public Ball getBall() {
         return ball;
     }
-    
+
+    public int getVidas() {
+        return vidas;
+    }
+     
     public MouseManager getMouseManager(){
         return mouseManager;
     }
@@ -82,7 +95,15 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
+    
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
+    }
 
+        public void setCounterVidas(int counterVidas) {
+        this.counterVidas = counterVidas;
+    }
+        
     /**
      * initializing the display window of the game
      */
@@ -144,6 +165,25 @@ public class Game implements Runnable {
             ball.setX(getWidth()/2);
             ball.setY(getHeight()/2);
         }
+        if(counterVidas == 3){
+            vidas--;
+            counterVidas = 0;
+    }
+        
+        if(score % 50 == 0 && score != 0 && !vidaAsignada){
+            extraVida = true;
+        }
+        
+        if(extraVida){
+            vidas++;
+            extraVida = false;
+            vidaAsignada = true;
+        }
+        
+        if(score % 50 != 0){
+            vidaAsignada = false;
+        }
+        
     }
 
     private void render() {

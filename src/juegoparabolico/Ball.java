@@ -133,11 +133,13 @@ public class Ball extends Item {
             setY(game.getHeight()/2);
             control = false;
             barrier = 300;
+            game.setCounterVidas(game.getCounterVidas() + 1);
         } else if (getY() <= 0) {
             setX(game.getWidth()/2 - (getWidth()/2));
             setY(game.getHeight()/2);
             control = false;
             barrier = 300;
+            game.setCounterVidas(game.getCounterVidas() + 1);
         }
         
     }
