@@ -170,31 +170,31 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-        if(basket.collision(ball)){
-            score += 10;
-            ball.setControl(false);
-            ball.setBarrier(300);
-            ball.setX(getWidth()/2);
-            ball.setY(getHeight()/2);
-            scoreSound();
+        if(basket.collision(ball)){ 
+            score += 10;                // Adds 10 to the score if collision
+            ball.setControl(false);     // Stops the coin from falling
+            ball.setBarrier(300);       // Sets the barrier limit to 300
+            ball.setX(getWidth()/2);    // Sets X position of coin to the center
+            ball.setY(getHeight()/2);   // Sets Y position of coin to the center
+            scoreSound();               // Plays scoring sound
         }
         if(counterVidas == 3){
-            vidas--;
-            counterVidas = 0;
+            vidas--;                // Takes off a life if coin has failed 3 times
+            counterVidas = 0;       // Restarts counter to 0
         }
         
         if(score % 50 == 0 && score != 0 && !vidaAsignada){
-            extraVida = true;
+            extraVida = true; // turns bool to true if vidaAsignada is false
         }
         
         if(extraVida){
-            vidas++;
-            extraVida = false;
-            vidaAsignada = true;
+            vidas++;                // Assigns extra life
+            extraVida = false;      // Turns the bool to false
+            vidaAsignada = true;    // Turns this bool to true
         }
         
         if(score % 50 != 0){
-            vidaAsignada = false;
+            vidaAsignada = false;   // Turns bool to false whenever score is not divisible by 50
         }
         
     }
@@ -215,16 +215,16 @@ public class Game implements Runnable {
             g.drawImage(Assets.background, 0, 0, width, height, null);
             ball.render(g);
             basket.render(g);
-            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );
-            g.setColor(Color.GREEN);
-            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
-            g.drawString("Score: " + String.valueOf(score) , 30, 50);
+            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
+            g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
+            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);   // Vidas is displayed on the upper left part of the screen
+            g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen
             if(!keyManager.isPaused()){
-                g.drawImage(Assets.pause, 0, 0, width, height, null);
+                g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
             }
             if(vidas == 0){
-                g.drawImage(Assets.gameOver, 0, 0, width, height, null);
-                Assets.music.stop();    
+                g.drawImage(Assets.gameOver, 0, 0, width, height, null);    // If no more lives are left, displays game over screen
+                Assets.music.stop();                                        // Stops the music
             }
             bs.show();
             g.dispose();

@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
  * @author Rodrigo Torres
  */
 public class MouseManager implements MouseListener, MouseMotionListener{
-    private boolean izquierdo;
+    private boolean izquierdo; // to store if the left button is clicked
     private boolean derecho;
     private Game game;
     private int x;
@@ -98,8 +98,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
     }
     
     @Override
-    public void mouseMoved(MouseEvent e) {
-       
+    public void mouseMoved(MouseEvent e) {   
     }
 }
 
