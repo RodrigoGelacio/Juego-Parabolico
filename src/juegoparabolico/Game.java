@@ -101,11 +101,19 @@ public class Game implements Runnable {
         return height;
     }
     
+    /**
+     * sets vidas to the value assigned
+     * @param vidas 
+     */
     public void setVidas(int vidas) {
         this.vidas = vidas;
     }
 
-        public void setCounterVidas(int counterVidas) {
+    /**
+     * sets CounterVidas to the value assigned
+     * @param counterVidas 
+     */
+    public void setCounterVidas(int counterVidas) {
         this.counterVidas = counterVidas;
     }
         
@@ -218,7 +226,7 @@ public class Game implements Runnable {
             g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
             g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
             g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);   // Vidas is displayed on the upper left part of the screen
-            g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen
+            g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
             if(!keyManager.isPaused()){
                 g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
             }
@@ -232,6 +240,9 @@ public class Game implements Runnable {
 
     }
     
+    /**
+     * Plays score sound when called 
+     */
     public void scoreSound(){
         Assets.score.play();
     }
@@ -261,6 +272,10 @@ public class Game implements Runnable {
         }
     }
     
+    /**
+     * to save the game
+     * @param strFileName 
+     */
     public void Save(String strFileName) {
 
         try {
@@ -277,8 +292,10 @@ public class Game implements Runnable {
 
     }
 
-    //Save Enemies
-
+    /**
+     * to load the saved game
+     * @param strFileName 
+     */
     public void Load(String strFileName) {
         try {
             FileReader file = new FileReader(strFileName);
