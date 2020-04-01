@@ -74,26 +74,6 @@ public class Ball extends Item {
     @Override
     public void tick() {
         // moving player depending on flags and velocity
-        this.animationRotation1.tick();
-        this.animationRotation2.tick();
-        this.animationRotation3.tick();
-        this.animationRotation4.tick();
-        this.animationRotation5.tick();
-    
-        System.out.println(frames);
-        frames++;
-        if(frames == 135){
-    //    rotationNumber = 2;
-    } /* else if (frames == 270){
-        rotationNumber = 3;
-    }  else if (frames == 405){
-        rotationNumber = 4;
-    } else if(frames == 540){
-        rotationNumber = 5;
-    } else if(frames == 675){
-        rotationNumber = 1;
-        frames = 0;
-    } */
        
         
         if(!game.getMouseManager().isIzquierdo()){
@@ -108,12 +88,15 @@ public class Ball extends Item {
                 control = true;
                 
             }
+            if(!game.getMouseManager().isIzquierdo()){
+                this.animationRotation1.tick();
+            }
         }
         
         
         if (game.getMouseManager().isIzquierdo()) {
-            setX(game.getMouseManager().getX());
-            setY(game.getMouseManager().getY());
+            setX(game.getMouseManager().getX() -50 );
+            setY(game.getMouseManager().getY()- 50);
             
         }
        
@@ -165,24 +148,7 @@ public class Ball extends Item {
 
     @Override
     public void render(Graphics g) {
-        switch(rotationNumber){
-            case 1:
                 g.drawImage(animationRotation1.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-                break;
-            case 2:
-                g.drawImage(animationRotation2.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-                break;
-            case 3:
-                g.drawImage(animationRotation3.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-                break;
-            case 4:
-                g.drawImage(animationRotation4.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-                break;
-            case 5:
-                g.drawImage(animationRotation5.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-                break;
-        }
-        
     }
 }
 

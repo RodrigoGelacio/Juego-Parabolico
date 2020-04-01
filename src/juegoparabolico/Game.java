@@ -84,8 +84,8 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth()/2, getHeight()/2, 1, 50, 50, this,1);
-        basket = new Canasta(getWidth() - 100, getHeight() - 100, 100, 100, this);
+        ball = new Ball(getWidth()/2, getHeight()/2, 1, 70, 70, this,1);
+        basket = new Canasta(getWidth() - 150, getHeight() - 150, 160, 150, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);

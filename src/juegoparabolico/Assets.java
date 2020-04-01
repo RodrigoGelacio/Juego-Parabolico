@@ -27,21 +27,16 @@ public static BufferedImage portal[];
      * initializing the images of the game
      */
     public static void init() {
-        background = ImageLoader.loadImage("/images/space_background.jpg");
+        background = ImageLoader.loadImage("/images/park.png");
         player = ImageLoader.loadImage("/images/ball.png");
         sprite = ImageLoader.loadImage("/images/coin1.png");
         spriteBasket = ImageLoader.loadImage("/images/fountain.png");
         Spritesheet spritesheet = new Spritesheet(sprite);
         Spritesheet spritesheet2 = new Spritesheet(spriteBasket);
-        rotation1 = new BufferedImage[6]; // 54x58
-        rotation2 = new BufferedImage[6];
-        rotation3 = new BufferedImage[6];
-        rotation4 = new BufferedImage[6];
-        rotation5 = new BufferedImage[6];
+        rotation1 = new BufferedImage[6];
         portal = new BufferedImage[4];
         for(int i=0; i < 6; i++){
             rotation1[i] = spritesheet.crop(i * 116, 0, 116, 146);
-
         }
         for(int i = 0; i < 4; i++){
             portal[i] = spritesheet2.crop(i * 170, 0, 170, 130);

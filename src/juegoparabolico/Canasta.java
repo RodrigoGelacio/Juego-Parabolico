@@ -31,7 +31,7 @@ public class Canasta extends Item {
         this.width = width;
         this.height = height;
         this.game = game;
-        this.animationPortal = new Animation(Assets.portal, 400);
+        this.animationPortal = new Animation(Assets.portal, 150);
         
     }
 
