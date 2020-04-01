@@ -18,8 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *
- * @author antoniomejorado
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class Game implements Runnable {
 
@@ -115,7 +115,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth()/2, getHeight()/2, 1, 70, 70, this,1);
+        ball = new Ball(getWidth()/2, getHeight()/2, 70, 70, this,1);
         basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);

@@ -11,8 +11,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.SwingUtilities;
 
 /**
- *
- * @author Rodrigo
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class MouseManager implements MouseListener, MouseMotionListener{
     private boolean izquierdo;
@@ -99,7 +99,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
     
     @Override
     public void mouseMoved(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 }
 

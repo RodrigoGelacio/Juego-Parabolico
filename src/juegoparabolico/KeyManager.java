@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- *
+ * @author Sergio Tapia
  * @author Rodrigo Torres
  */
 public class KeyManager implements KeyListener {
@@ -48,10 +48,10 @@ public class KeyManager implements KeyListener {
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;
         if(e.getKeyCode() == KeyEvent.VK_S){
-            game.Save("game");
+            game.Save("game"); // If S key is pressed on the keyboard it saves the game
         }
         if(e.getKeyCode() == KeyEvent.VK_C){
-            game.Load("game");
+            game.Load("game"); // If C key is pressed on the keyboard it loads the saved game
         }
     }
 

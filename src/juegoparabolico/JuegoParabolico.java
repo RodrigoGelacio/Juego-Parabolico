@@ -6,8 +6,8 @@
 package juegoparabolico;
 
 /**
- *
- * @author Rodrigo
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class JuegoParabolico {
 /**

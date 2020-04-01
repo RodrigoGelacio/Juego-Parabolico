@@ -12,16 +12,14 @@ import java.awt.Graphics;
  * and open the template in the editor.
  */
 /**
- *
- * @author Locon
+ * @author Rodrigo Torres
+ * @author Sergio Tapia
  */
 public class Canasta extends Item {
 
     private int direction;
     private int width;
     private int height;
-    private boolean isBumpingWall = false;  // Booleano para saber si choco con la pared
-    int frames = 0;                         // variable para contar frames
     private Game game;
     private Animation animationPortal;
 
@@ -59,13 +57,10 @@ public class Canasta extends Item {
         this.height = height;
     }
 
-    /**
-     *
-     */
+  
     @Override
     public void tick() {
-        this.animationPortal.tick();
-        
+        this.animationPortal.tick(); // Starts the fountain animation 
     }
 
     @Override

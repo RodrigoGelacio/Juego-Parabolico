@@ -11,12 +11,10 @@ import java.awt.event.KeyEvent;
 import java.util.Timer;
 
 /**
- *
+ * @author Sergio Tapia
  * @author Rodrigo Torres
  */
 public class Ball extends Item {
-
-    private int direction;
     private Game game;
     private int counter;
     private int velocityX;
@@ -24,8 +22,6 @@ public class Ball extends Item {
     private double velocityYFinal;
     private double gravity;
     private int barrier;
-    private int frames;
-    private int rotationNumber;
     private boolean control;
     private long initialTime;
     private long nowTime;
@@ -34,70 +30,67 @@ public class Ball extends Item {
     private int enter;
     private Animation animationRotation1;
 
-    public Ball(int x, int y, int direction, int width, int height, Game game, int counter) {
+    public Ball(int x, int y, int width, int height, Game game, int counter) {
         super(x, y, width, height);
-        this.direction = direction;
         this.game = game;
         this.counter = counter;
         velocityX = 0;
-        barrier = 300;
-        initialTime = 0;
-        velocityYInitial = 0.0;
-        velocityYFinal = 0.0;
-        gravity = .0981;
+        barrier = 300;                  // The size of the "ready" area
+        initialTime = 0;                // The time where the movement starts (usually 0)
+        velocityYInitial = 0.0;         // double variable to store initial value of velocity to use it later on the formula
+        velocityYFinal = 0.0;           // double variable to store final value of velocity to use it later on the formula
+        gravity = .0981;                // Gravity value divided by 100
         nowTime = 0;
         trueTime = 0;
         control = false;
         controlGravity = false;
         enter = 0;
-        frames = 0;
-        rotationNumber = 1;
         this.animationRotation1 = new Animation(Assets.rotation1, 100);
     }
 
+    /**
+     * to set the barrier limit to a different value
+     * @param barrier 
+     */
     public void setBarrier(int barrier) {
         this.barrier = barrier;
     }
     
 
+    /**
+     * to set control to a different value
+     * @param control 
+     */
     public void setControl(boolean control) {
         this.control = control;
     }
 
-    public int getDirection() {
-        return direction;
-    }
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
     @Override
     public void tick() {
-        // moving player depending on flags and velocity
-       
-        
+
+        // Detects if the proyectile is in x <= 300 and assigns the velocity values
         if(!game.getMouseManager().isIzquierdo()){
             if(getX() <= barrier){
                 if(getX() <= 300){
                     velocityX = (300 - getX())/50;
                 }
                 
-                initialTime = System.nanoTime() - 1000000000;
-                velocityYInitial = velocityX * (Math.tan(45));
+                initialTime = System.nanoTime() - 1000000000;    // sets initial time of the movement  
+                velocityYInitial = velocityX * (Math.tan(45));   // sets Y axis initial velocity with a 45 degree angle
                 barrier = velocityX;
                 control = true;
                 
             }
+            // Cuando se presiona el proyectil se para la animación hasta que lo suelte
             if(!game.getMouseManager().isIzquierdo()){
                 this.animationRotation1.tick();
             }
         }
         
-        
+        // Drags the item with the mouse until mouse button is released
         if (game.getMouseManager().isIzquierdo()) {
-            setX(game.getMouseManager().getX() -50 );
-            setY(game.getMouseManager().getY()- 50);
+            setX(game.getMouseManager().getX() - 50 );      // sets the item to the mouse position in X axis
+            setY(game.getMouseManager().getY()- 50);        // sets the item to the mouse position in Y axis
             
         }
        
@@ -106,7 +99,6 @@ public class Ball extends Item {
             setX(getX() + velocityX);
             
             
-//            System.out.println((System.nanoTime() - initialTime) / 1000000000);
             velocityYFinal = velocityYInitial - gravity* ((System.nanoTime() - initialTime)/1000000000);
             velocityYInitial = velocityYFinal;
             
