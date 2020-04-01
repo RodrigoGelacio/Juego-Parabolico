@@ -122,9 +122,12 @@ public class Game implements Runnable {
 
             // if delta is positive we tick the game
             if (delta >= 1) {
+                if(keyManager.isPaused()){
                 tick();
+                }
                 render();
                 delta--;
+                
             }
         }
         stop();
@@ -166,6 +169,9 @@ public class Game implements Runnable {
             g.setColor(Color.GREEN);
             g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
             g.drawString("Score: " + String.valueOf(score) , 30, 50);
+            if(!keyManager.isPaused()){
+                g.drawImage(Assets.pause, 0, 0, width, height, null);
+            }
             bs.show();
             g.dispose();
         }
