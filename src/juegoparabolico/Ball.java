@@ -33,10 +33,6 @@ public class Ball extends Item {
     private boolean controlGravity;
     private int enter;
     private Animation animationRotation1;
-    private Animation animationRotation2;
-    private Animation animationRotation3;
-    private Animation animationRotation4;
-    private Animation animationRotation5;
 
     public Ball(int x, int y, int direction, int width, int height, Game game, int counter) {
         super(x, y, width, height);
@@ -57,10 +53,10 @@ public class Ball extends Item {
         frames = 0;
         rotationNumber = 1;
         this.animationRotation1 = new Animation(Assets.rotation1, 100);
-        this.animationRotation2 = new Animation(Assets.rotation2, 100);
-        this.animationRotation3 = new Animation(Assets.rotation3, 100);
-        this.animationRotation4 = new Animation(Assets.rotation4, 100);
-        this.animationRotation5 = new Animation(Assets.rotation4, 100);
+    }
+
+    public void setControl(boolean control) {
+        this.control = control;
     }
 
     public int getDirection() {

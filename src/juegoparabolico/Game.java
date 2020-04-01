@@ -6,6 +6,7 @@ package juegoparabolico;
  * and open the template in the editor.
  */
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Timer;
@@ -31,6 +32,8 @@ public class Game implements Runnable {
     private MouseManager mouseManager;
     private Timer timer;
     private TimerTask task;
+    private int score;
+    private int vidas;
 
     /**
      * to create title, width and height and set the game is still not running
@@ -46,6 +49,8 @@ public class Game implements Runnable {
         running = false;
         keyManager = new KeyManager();
         mouseManager = new MouseManager(this);
+        score = 0;
+        vidas = 5;
     }
 
     /**
@@ -85,7 +90,7 @@ public class Game implements Runnable {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
         ball = new Ball(getWidth()/2, getHeight()/2, 1, 70, 70, this,1);
-        basket = new Canasta(getWidth() - 150, getHeight() - 150, 160, 150, this);
+        basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
@@ -131,9 +136,14 @@ public class Game implements Runnable {
 
     private void tick() {
         keyManager.tick();
-        // avancing player with colision
         ball.tick();
         basket.tick();
+        if(basket.collision(ball)){
+            score += 10;
+            ball.setControl(false);
+            ball.setX(getWidth()/2);
+            ball.setY(getHeight()/2);
+        }
     }
 
     private void render() {
@@ -152,6 +162,10 @@ public class Game implements Runnable {
             g.drawImage(Assets.background, 0, 0, width, height, null);
             ball.render(g);
             basket.render(g);
+            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );
+            g.setColor(Color.GREEN);
+            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
+            g.drawString("Score: " + String.valueOf(score) , 30, 50);
             bs.show();
             g.dispose();
         }

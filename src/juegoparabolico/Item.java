@@ -92,10 +92,10 @@ public abstract class Item {
     public boolean collision(Object o){
         boolean bStatus = false;  //assuming not collision
         if(o instanceof Item){
-            Rectangle rThis = new Rectangle(getX(),getY(),getWidth(),getHeight());
+            Rectangle rThis = new Rectangle(getX(),getY(),getWidth()/2,getHeight()/2);
             Item i = (Item)o;
             Rectangle rOther = new Rectangle(i.getX(),i.getY(),i.getWidth(),i.getHeight());
-            bStatus= rThis.intersects(rOther);
+            bStatus= rThis.contains(rOther);
         }
         return bStatus;
     }
