@@ -85,7 +85,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
         x = e.getX();
         y = e.getY();
-
+        
+        //checks if the mouse is inside the coin and also if you are clicking the left button of the mouse
         if (x >= game.getBall().getX() && x <= game.getBall().getX() + 50
                 && y >= game.getBall().getY() && y <= game.getBall().getY() + 50 && SwingUtilities.isLeftMouseButton(e)) {
             izquierdo = true;

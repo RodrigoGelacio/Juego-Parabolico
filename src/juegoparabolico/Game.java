@@ -14,8 +14,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author Sergio Tapia
@@ -31,12 +29,10 @@ public class Game implements Runnable {
     private int height;             // height of the window
     private Thread thread;          // thread to create the game
     private boolean running;        // to set the game
-    private Ball ball;              // to use a player
-    private Canasta basket;
+    private Ball ball;              // to use the coin
+    private Canasta basket;         // to use the fountain
     private KeyManager keyManager;  // to manage the keyboard
-    private MouseManager mouseManager;
-    private Timer timer;
-    private TimerTask task;
+    private MouseManager mouseManager; // to manage Mouse
     private int score;
     private int vidas;
     private int counterVidas;
@@ -159,7 +155,7 @@ public class Game implements Runnable {
 
             // if delta is positive we tick the game
             if (delta >= 1) {
-                if (keyManager.isPaused()) {
+                if (keyManager.isPaused()) { //if it is paused the game stops ticking
                     if (vidas != 0) {
                         tick();
                     }
@@ -181,7 +177,7 @@ public class Game implements Runnable {
         ball.tick();
         basket.tick();
         if (ball.getX() >= basket.getX() && ball.getX() <= basket.getX() + basket.getWidth()
-                && ball.getY() > basket.getY()) {
+                && ball.getY() > basket.getY()) { //checks if the coin is inside the fountain
             score += 10;
             ball.setControl(false);
             ball.setBarrier(300);
@@ -256,7 +252,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * setting the thead for the game
+     * setting the thread for the game
      */
     public synchronized void start() {
         if (!running) {

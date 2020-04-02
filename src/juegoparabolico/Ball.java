@@ -16,7 +16,6 @@ import java.util.Timer;
 public class Ball extends Item {
 
     private Game game;
-    private int counter;
     private int velocityX;
     private double velocityYInitial;
     private double velocityYFinal;
@@ -24,27 +23,20 @@ public class Ball extends Item {
     private int barrier;
     private boolean control;
     private long initialTime;
-    private long nowTime;
-    private long trueTime;
     private boolean controlGravity;
-    private int enter;
     private Animation animationRotation1;
 
     public Ball(int x, int y, int width, int height, Game game, int counter) {
         super(x, y, width, height);
         this.game = game;
-        this.counter = counter;
         velocityX = 0;
         barrier = 300;                  // The size of the "ready" area
         initialTime = 0;                // The time where the movement starts (usually 0)
         velocityYInitial = 0.0;         // double variable to store initial value of velocity to use it later on the formula
         velocityYFinal = 0.0;           // double variable to store final value of velocity to use it later on the formula
         gravity = .0981;                // Gravity value divided by 100
-        nowTime = 0;
-        trueTime = 0;
         control = false;
         controlGravity = false;
-        enter = 0;
         this.animationRotation1 = new Animation(Assets.rotation1, 100);
     }
 
