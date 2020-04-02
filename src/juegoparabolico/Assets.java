@@ -13,18 +13,6 @@ import java.awt.image.BufferedImage;
  * @author antoniomejorado
  */
 public class Assets {
-<<<<<<< HEAD
-    public static BufferedImage background; // to store background image
-    public static BufferedImage player;     // to store the player image
-    public static BufferedImage sprite;
-    public static BufferedImage pause;
-    public static BufferedImage gameOver;
-    public static BufferedImage spriteBasket;
-    public static BufferedImage rotation1[];
-    public static BufferedImage building;
-    public static SoundClip score;
-    public static SoundClip music;
-=======
     public static BufferedImage background;     // to store background image
     public static BufferedImage player;         // to store the player image
     public static BufferedImage sprite;         // to store coin spritesheet
@@ -35,7 +23,7 @@ public class Assets {
     public static SoundClip score;              // to store the score sound
     public static SoundClip music;              // to store the background music sound
     public static BufferedImage portal[];       // to store each image of the fountain sprite sheet
->>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
+    public static BufferedImage building;
     
     /**
      * initializing the images of the game

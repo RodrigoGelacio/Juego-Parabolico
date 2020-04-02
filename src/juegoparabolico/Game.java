@@ -178,9 +178,8 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-<<<<<<< HEAD
-        if(ball.getX() >= basket.getX() && ball.getX() <= basket.getX()+basket.getWidth() && 
-                ball.getY() < basket.getY()+40){
+        if(ball.getX() >= basket.getX() && ball.getX() <= basket.getX()+ basket.getWidth() && 
+                ball.getY() > basket.getY()){
             score += 10;
             ball.setControl(false);
             ball.setBarrier(300);
@@ -188,16 +187,8 @@ public class Game implements Runnable {
             ball.setY(getHeight()/2);
             scoreSound();
             basket.setX((int)(Math.random()*((width-210)-300+1)+300));
-=======
-        if(basket.collision(ball)){ 
-            score += 10;                // Adds 10 to the score if collision
-            ball.setControl(false);     // Stops the coin from falling
-            ball.setBarrier(300);       // Sets the barrier limit to 300
-            ball.setX(getWidth()/2);    // Sets X position of coin to the center
-            ball.setY(getHeight()/2);   // Sets Y position of coin to the center
-            scoreSound();               // Plays scoring sound
->>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
         }
+           
         if(counterVidas == 3){
             vidas--;                // Takes off a life if coin has failed 3 times
             counterVidas = 0;       // Restarts counter to 0
@@ -236,19 +227,12 @@ public class Game implements Runnable {
             g.drawImage(Assets.building, 0, 0, 300, height, null);
             ball.render(g);
             basket.render(g);
-<<<<<<< HEAD
-            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );
-            g.setColor(Color.GREEN);
-            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
-            g.drawString("Score: " + String.valueOf(score) , 30, 50);
+            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
             g.setColor(Color.red);
             g.drawString("Launch Zone",  50, height-20);
-=======
-            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
             g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
             g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);   // Vidas is displayed on the upper left part of the screen
             g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
->>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
             if(!keyManager.isPaused()){
                 g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
             }
