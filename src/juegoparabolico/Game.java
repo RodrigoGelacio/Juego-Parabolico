@@ -21,18 +21,18 @@ import java.io.PrintWriter;
  */
 public class Game implements Runnable {
 
-    private BufferStrategy bs;      // to have several buffers when displaying
-    private Graphics g;             // to paint objects
-    private Display display;        // to display in the game
-    String title;                   // title of the window
-    private int width;              // width of the window
-    private int height;             // height of the window
-    private Thread thread;          // thread to create the game
-    private boolean running;        // to set the game
-    private Ball ball;              // to use the coin
-    private Canasta basket;         // to use the fountain
-    private KeyManager keyManager;  // to manage the keyboard
-    private MouseManager mouseManager; // to manage Mouse
+    private BufferStrategy bs;          // to have several buffers when displaying
+    private Graphics g;                 // to paint objects
+    private Display display;            // to display in the game
+    String title;                       // title of the window
+    private int width;                  // width of the window
+    private int height;                 // height of the window
+    private Thread thread;              // thread to create the game
+    private boolean running;            // to set the game
+    private Ball ball;                  // to use the coin
+    private Canasta basket;             // to use the fountain
+    private KeyManager keyManager;      // to manage the keyboard
+    private MouseManager mouseManager;  // to manage Mouse
     private int score;
     private int vidas;
     private int counterVidas;
@@ -121,8 +121,8 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth() / 2, getHeight() / 2, 70, 70, this, 1);
-        basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);
+        ball = new Ball(getWidth() / 2, getHeight() / 2, 70, 70, this, 1);          //Initializes an item of type Ball
+        basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);  // Initializes an item of type Canasta
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);
@@ -176,10 +176,9 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-        if (ball.getX() >= basket.getX() && ball.getX() <= basket.getX() + basket.getWidth()
-                && ball.getY() > basket.getY()) { //checks if the coin is inside the fountain
+        if (basket.collision(ball) && ! mouseManager.isIzquierdo()) {   //checks if the coin is inside the fountain
             score += 10;
-            ball.setControl(false);
+            ball.setControl(false);                 //sets gravity off after placiing
             ball.setBarrier(300);
             ball.setX(getWidth() / 2);
             ball.setY(getHeight() / 2);
@@ -221,8 +220,8 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.drawImage(Assets.background, 0, 0, width, height, null);
-            g.drawImage(Assets.building, 0, 0, 300, height, null);
+            g.drawImage(Assets.background, 0, 0, width, height, null);  // Shows background
+            g.drawImage(Assets.building, 0, 0, 300, height, null);      // SHows building
             ball.render(g);
             basket.render(g);
             g.setFont(new Font("Tahoma", Font.BOLD, 20));           // Assigns a font to the upcoming setColor and drawString
