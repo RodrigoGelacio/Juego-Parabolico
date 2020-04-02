@@ -68,7 +68,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     *
      * @return ball
      */
     public Ball getBall() {
@@ -78,8 +78,8 @@ public class Game implements Runnable {
     public int getVidas() {
         return vidas;
     }
-     
-    public MouseManager getMouseManager(){
+
+    public MouseManager getMouseManager() {
         return mouseManager;
     }
 
@@ -100,10 +100,11 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
-    
+
     /**
      * sets vidas to the value assigned
-     * @param vidas 
+     *
+     * @param vidas
      */
     public void setVidas(int vidas) {
         this.vidas = vidas;
@@ -111,19 +112,20 @@ public class Game implements Runnable {
 
     /**
      * sets CounterVidas to the value assigned
-     * @param counterVidas 
+     *
+     * @param counterVidas
      */
     public void setCounterVidas(int counterVidas) {
         this.counterVidas = counterVidas;
     }
-        
+
     /**
      * initializing the display window of the game
      */
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth()/2, getHeight()/2, 70, 70, this,1);
+        ball = new Ball(getWidth() / 2, getHeight() / 2, 70, 70, this, 1);
         basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -157,14 +159,14 @@ public class Game implements Runnable {
 
             // if delta is positive we tick the game
             if (delta >= 1) {
-                if(keyManager.isPaused()){
-                    if(vidas != 0){
+                if (keyManager.isPaused()) {
+                    if (vidas != 0) {
                         tick();
                     }
                 }
                 render();
                 delta--;
-                
+
             }
         }
         stop();
@@ -178,36 +180,36 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-        if(ball.getX() >= basket.getX() && ball.getX() <= basket.getX()+ basket.getWidth() && 
-                ball.getY() > basket.getY()){
+        if (ball.getX() >= basket.getX() && ball.getX() <= basket.getX() + basket.getWidth()
+                && ball.getY() > basket.getY()) {
             score += 10;
             ball.setControl(false);
             ball.setBarrier(300);
-            ball.setX(getWidth()/2);
-            ball.setY(getHeight()/2);
+            ball.setX(getWidth() / 2);
+            ball.setY(getHeight() / 2);
             scoreSound();
-            basket.setX((int)(Math.random()*((width-210)-300+1)+300));
+            basket.setX((int) (Math.random() * ((width - 210) - 300 + 1) + 300));
         }
-           
-        if(counterVidas == 3){
+
+        if (counterVidas == 3) {
             vidas--;                // Takes off a life if coin has failed 3 times
             counterVidas = 0;       // Restarts counter to 0
         }
-        
-        if(score % 50 == 0 && score != 0 && !vidaAsignada){
+
+        if (score % 50 == 0 && score != 0 && !vidaAsignada) {
             extraVida = true; // turns bool to true if vidaAsignada is false
         }
-        
-        if(extraVida){
+
+        if (extraVida) {
             vidas++;                // Assigns extra life
             extraVida = false;      // Turns the bool to false
             vidaAsignada = true;    // Turns this bool to true
         }
-        
-        if(score % 50 != 0){
+
+        if (score % 50 != 0) {
             vidaAsignada = false;   // Turns bool to false whenever score is not divisible by 50
         }
-        
+
     }
 
     private void render() {
@@ -227,16 +229,16 @@ public class Game implements Runnable {
             g.drawImage(Assets.building, 0, 0, 300, height, null);
             ball.render(g);
             basket.render(g);
-            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
+            g.setFont(new Font("Tahoma", Font.BOLD, 20));           // Assigns a font to the upcoming setColor and drawString
             g.setColor(Color.red);
-            g.drawString("Launch Zone",  50, height-20);
+            g.drawString("Launch Zone", 50, height - 20);
             g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
-            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);   // Vidas is displayed on the upper left part of the screen
-            g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
-            if(!keyManager.isPaused()){
+            g.drawString("Vidas: " + String.valueOf(vidas), 30, 30);   // Vidas is displayed on the upper left part of the screen
+            g.drawString("Score: " + String.valueOf(score), 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
+            if (!keyManager.isPaused()) {
                 g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
             }
-            if(vidas == 0){
+            if (vidas == 0) {
                 g.drawImage(Assets.gameOver, 0, 0, width, height, null);    // If no more lives are left, displays game over screen
                 Assets.music.stop();                                        // Stops the music
             }
@@ -245,14 +247,14 @@ public class Game implements Runnable {
         }
 
     }
-    
+
     /**
-     * Plays score sound when called 
+     * Plays score sound when called
      */
-    public void scoreSound(){
+    public void scoreSound() {
         Assets.score.play();
     }
-    
+
     /**
      * setting the thead for the game
      */
@@ -277,10 +279,11 @@ public class Game implements Runnable {
             }
         }
     }
-    
+
     /**
      * to save the game
-     * @param strFileName 
+     *
+     * @param strFileName
      */
     public void Save(String strFileName) {
 
@@ -300,7 +303,8 @@ public class Game implements Runnable {
 
     /**
      * to load the saved game
-     * @param strFileName 
+     *
+     * @param strFileName
      */
     public void Load(String strFileName) {
         try {
@@ -325,5 +329,3 @@ public class Game implements Runnable {
     }
 
 }
-
-

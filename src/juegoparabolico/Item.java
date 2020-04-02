@@ -5,8 +5,6 @@ package juegoparabolico;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -15,13 +13,15 @@ import java.awt.Rectangle;
  * @author Sergio Tapia
  */
 public abstract class Item {
+
     protected int x;        // to store x position
     protected int y;        // to store y position
     protected int width;
     protected int height;
-    
+
     /**
      * Set the initial values to create the item
+     *
      * @param x <b>x</b> position of the object
      * @param y <b>y</b> position of the object
      */
@@ -34,7 +34,8 @@ public abstract class Item {
 
     /**
      * Get x value
-     * @return x 
+     *
+     * @return x
      */
     public int getX() {
         return x;
@@ -42,21 +43,24 @@ public abstract class Item {
 
     /**
      * Get y value
-     * @return y 
+     *
+     * @return y
      */
     public int getY() {
         return y;
     }
 
-     public int getWidth() {
+    public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
     }
-   /**
+
+    /**
      * Set x value
+     *
      * @param x to modify
      */
     public void setX(int x) {
@@ -65,12 +69,13 @@ public abstract class Item {
 
     /**
      * Set y value
+     *
      * @param y to modify
      */
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public void setWidth(int width) {
         this.width = width;
     }
@@ -78,26 +83,27 @@ public abstract class Item {
     public void setHeight(int height) {
         this.height = height;
     }
+
     /**
      * To update positions of the item for every tick
      */
     public abstract void tick();
-    
+
     /**
      * To paint the item
+     *
      * @param g <b>Graphics</b> object to paint the item
      */
     public abstract void render(Graphics g);
-    
-    public boolean collision(Object o){
+
+    public boolean collision(Object o) {
         boolean bStatus = false;  //assuming not collision
-        if(o instanceof Item){
-            Rectangle rThis = new Rectangle(getX(),getY(),getWidth()/2,getHeight()/2); // Made Rectangle smaller so that coin has to touch only the upper part of the fountain
-            Item i = (Item)o;
-            Rectangle rOther = new Rectangle(i.getX(),i.getY(),i.getWidth(),i.getHeight());
-            bStatus= rThis.contains(rOther);        // Used contains so that this way coin has to completely fit in to count the points
+        if (o instanceof Item) {
+            Rectangle rThis = new Rectangle(getX(), getY(), getWidth() / 2, getHeight() / 2); // Made Rectangle smaller so that coin has to touch only the upper part of the fountain
+            Item i = (Item) o;
+            Rectangle rOther = new Rectangle(i.getX(), i.getY(), i.getWidth(), i.getHeight());
+            bStatus = rThis.contains(rOther);        // Used contains so that this way coin has to completely fit in to count the points
         }
         return bStatus;
     }
 }
-

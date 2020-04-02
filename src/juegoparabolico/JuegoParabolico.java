@@ -10,7 +10,8 @@ package juegoparabolico;
  * @author Rodrigo Torres
  */
 public class JuegoParabolico {
-/**
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -18,5 +19,5 @@ public class JuegoParabolico {
         Game g = new Game("Juego", 1000, 700);
         g.start();
     }
-    
+
 }

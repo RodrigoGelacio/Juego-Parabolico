@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package juegoparabolico;
+
 import java.awt.Graphics;
 
 /*
@@ -30,7 +31,7 @@ public class Canasta extends Item {
         this.height = height;
         this.game = game;
         this.animationPortal = new Animation(Assets.portal, 150);
-        
+
     }
 
     public int getDirection() {
@@ -57,7 +58,6 @@ public class Canasta extends Item {
         this.height = height;
     }
 
-  
     @Override
     public void tick() {
         this.animationPortal.tick(); // Starts the fountain animation 
@@ -65,8 +65,8 @@ public class Canasta extends Item {
 
     @Override
     public void render(Graphics g) {
-            g.drawImage(animationPortal.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
-        
+        g.drawImage(animationPortal.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+
     }
 
 }

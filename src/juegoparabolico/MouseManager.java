@@ -14,29 +14,30 @@ import javax.swing.SwingUtilities;
  * @author Sergio Tapia
  * @author Rodrigo Torres
  */
-public class MouseManager implements MouseListener, MouseMotionListener{
+public class MouseManager implements MouseListener, MouseMotionListener {
+
     private boolean izquierdo; // to store if the left button is clicked
     private boolean derecho;
     private Game game;
     private int x;
     private int y;
-    
-    public MouseManager(Game game){
+
+    public MouseManager(Game game) {
         this.game = game;
     }
-    
-    public boolean isIzquierdo(){
+
+    public boolean isIzquierdo() {
         return izquierdo;
     }
-    
-    public boolean isDerecho(){
+
+    public boolean isDerecho() {
         return derecho;
     }
-    
-    public void setIzquierdo(boolean izquierdo){
+
+    public void setIzquierdo(boolean izquierdo) {
         this.izquierdo = izquierdo;
     }
-    
+
     public int getX() {
         return x;
     }
@@ -52,12 +53,10 @@ public class MouseManager implements MouseListener, MouseMotionListener{
     public void setY(int y) {
         this.y = y;
     }
-    
-    
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+
     }
 
     @Override
@@ -66,7 +65,7 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){
+        if (e.getButton() == MouseEvent.BUTTON1) {
             izquierdo = false;
             x = e.getX();
             y = e.getY();
@@ -83,28 +82,20 @@ public class MouseManager implements MouseListener, MouseMotionListener{
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        
-            x = e.getX();
-            y = e.getY();
-        
-        if(x >= game.getBall().getX() && x <= game.getBall().getX()+50
-                && y >= game.getBall().getY() && y <= game.getBall().getY()+50 && SwingUtilities.isLeftMouseButton(e)){
+
+        x = e.getX();
+        y = e.getY();
+
+        if (x >= game.getBall().getX() && x <= game.getBall().getX() + 50
+                && y >= game.getBall().getY() && y <= game.getBall().getY() + 50 && SwingUtilities.isLeftMouseButton(e)) {
             izquierdo = true;
             x = e.getX();
             y = e.getY();
         }
-         
-         
+
     }
-    
+
     @Override
-    public void mouseMoved(MouseEvent e) {   
+    public void mouseMoved(MouseEvent e) {
     }
 }
-
-    
-         
-    
-
-    
-

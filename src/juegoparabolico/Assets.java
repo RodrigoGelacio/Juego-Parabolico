@@ -5,7 +5,6 @@ package juegoparabolico;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.awt.image.BufferedImage;
 
 /**
@@ -13,6 +12,7 @@ import java.awt.image.BufferedImage;
  * @author antoniomejorado
  */
 public class Assets {
+
     public static BufferedImage background;     // to store background image
     public static BufferedImage player;         // to store the player image
     public static BufferedImage sprite;         // to store coin spritesheet
@@ -24,7 +24,7 @@ public class Assets {
     public static SoundClip music;              // to store the background music sound
     public static BufferedImage portal[];       // to store each image of the fountain sprite sheet
     public static BufferedImage building;
-    
+
     /**
      * initializing the images of the game
      */
@@ -41,14 +41,12 @@ public class Assets {
         Spritesheet spritesheet2 = new Spritesheet(spriteBasket);
         rotation1 = new BufferedImage[6];
         portal = new BufferedImage[4];
-        for(int i=0; i < 6; i++){
+        for (int i = 0; i < 6; i++) {
             rotation1[i] = spritesheet.crop(i * 116, 0, 116, 146);  // crops images for the coin animation
         }
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             portal[i] = spritesheet2.crop(i * 170, 0, 170, 130);    // crops images for the fountain animation
         }
     }
-    
+
 }
-
-
