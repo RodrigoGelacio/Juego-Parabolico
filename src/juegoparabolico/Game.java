@@ -192,7 +192,7 @@ public class Game implements Runnable {
         }
 
         if (score % 50 == 0 && score != 0 && !vidaAsignada) {
-            extraVida = true;       // turns bool to true if vidaAsignada is false
+            extraVida = true;       // turns bool to true if vidaAsignada is false and score is divisible by 50
         }
 
         if (extraVida) {
