@@ -170,13 +170,15 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-        if(basket.collision(ball)){
+        if(ball.getX() >= basket.getX() && ball.getX() <= basket.getX()+basket.getWidth() && 
+                ball.getY() < basket.getY()+40){
             score += 10;
             ball.setControl(false);
             ball.setBarrier(300);
             ball.setX(getWidth()/2);
             ball.setY(getHeight()/2);
             scoreSound();
+            basket.setX((int)(Math.random()*((width-210)-300+1)+300));
         }
         if(counterVidas == 3){
             vidas--;
@@ -213,12 +215,15 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.drawImage(Assets.background, 0, 0, width, height, null);
+            g.drawImage(Assets.building, 0, 0, 300, height, null);
             ball.render(g);
             basket.render(g);
             g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );
             g.setColor(Color.GREEN);
             g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
             g.drawString("Score: " + String.valueOf(score) , 30, 50);
+            g.setColor(Color.red);
+            g.drawString("Launch Zone",  50, height-20);
             if(!keyManager.isPaused()){
                 g.drawImage(Assets.pause, 0, 0, width, height, null);
             }

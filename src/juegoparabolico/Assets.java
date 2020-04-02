@@ -20,6 +20,7 @@ public class Assets {
     public static BufferedImage gameOver;
     public static BufferedImage spriteBasket;
     public static BufferedImage rotation1[];
+    public static BufferedImage building;
     public static SoundClip score;
     public static SoundClip music;
     
@@ -29,6 +30,7 @@ public static BufferedImage portal[];
      */
     public static void init() {
         music = new SoundClip("/sounds/guitarMusic.wav");
+        building = ImageLoader.loadImage("/images/building.png");
         score = new SoundClip("/sounds/score.wav");
         background = ImageLoader.loadImage("/images/park.png");
         player = ImageLoader.loadImage("/images/ball.png");
