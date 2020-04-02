@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
  */
 
 /**
- *
- * @author Rodrigo
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class Spritesheet {
     private BufferedImage sheet;

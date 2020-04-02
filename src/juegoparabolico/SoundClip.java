@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.net.URL;
                                                         
 /**
- *
- * @author antoniomejorado
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class SoundClip { 
                                                        

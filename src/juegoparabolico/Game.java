@@ -18,8 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- *
- * @author antoniomejorado
+ * @author Sergio Tapia
+ * @author Rodrigo Torres
  */
 public class Game implements Runnable {
 
@@ -101,11 +101,19 @@ public class Game implements Runnable {
         return height;
     }
     
+    /**
+     * sets vidas to the value assigned
+     * @param vidas 
+     */
     public void setVidas(int vidas) {
         this.vidas = vidas;
     }
 
-        public void setCounterVidas(int counterVidas) {
+    /**
+     * sets CounterVidas to the value assigned
+     * @param counterVidas 
+     */
+    public void setCounterVidas(int counterVidas) {
         this.counterVidas = counterVidas;
     }
         
@@ -115,7 +123,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        ball = new Ball(getWidth()/2, getHeight()/2, 1, 70, 70, this,1);
+        ball = new Ball(getWidth()/2, getHeight()/2, 70, 70, this,1);
         basket = new Canasta(getWidth() - 200, getHeight() - 200, 210, 200, this);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -170,6 +178,7 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
+<<<<<<< HEAD
         if(ball.getX() >= basket.getX() && ball.getX() <= basket.getX()+basket.getWidth() && 
                 ball.getY() < basket.getY()+40){
             score += 10;
@@ -179,24 +188,33 @@ public class Game implements Runnable {
             ball.setY(getHeight()/2);
             scoreSound();
             basket.setX((int)(Math.random()*((width-210)-300+1)+300));
+=======
+        if(basket.collision(ball)){ 
+            score += 10;                // Adds 10 to the score if collision
+            ball.setControl(false);     // Stops the coin from falling
+            ball.setBarrier(300);       // Sets the barrier limit to 300
+            ball.setX(getWidth()/2);    // Sets X position of coin to the center
+            ball.setY(getHeight()/2);   // Sets Y position of coin to the center
+            scoreSound();               // Plays scoring sound
+>>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
         }
         if(counterVidas == 3){
-            vidas--;
-            counterVidas = 0;
+            vidas--;                // Takes off a life if coin has failed 3 times
+            counterVidas = 0;       // Restarts counter to 0
         }
         
         if(score % 50 == 0 && score != 0 && !vidaAsignada){
-            extraVida = true;
+            extraVida = true; // turns bool to true if vidaAsignada is false
         }
         
         if(extraVida){
-            vidas++;
-            extraVida = false;
-            vidaAsignada = true;
+            vidas++;                // Assigns extra life
+            extraVida = false;      // Turns the bool to false
+            vidaAsignada = true;    // Turns this bool to true
         }
         
         if(score % 50 != 0){
-            vidaAsignada = false;
+            vidaAsignada = false;   // Turns bool to false whenever score is not divisible by 50
         }
         
     }
@@ -218,18 +236,25 @@ public class Game implements Runnable {
             g.drawImage(Assets.building, 0, 0, 300, height, null);
             ball.render(g);
             basket.render(g);
+<<<<<<< HEAD
             g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );
             g.setColor(Color.GREEN);
             g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);
             g.drawString("Score: " + String.valueOf(score) , 30, 50);
             g.setColor(Color.red);
             g.drawString("Launch Zone",  50, height-20);
+=======
+            g.setFont( new Font( "Tahoma", Font.BOLD, 20 ) );           // Assigns a font to the upcoming setColor and drawString
+            g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
+            g.drawString("Vidas: " + String.valueOf(vidas) , 30, 30);   // Vidas is displayed on the upper left part of the screen
+            g.drawString("Score: " + String.valueOf(score) , 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
+>>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
             if(!keyManager.isPaused()){
-                g.drawImage(Assets.pause, 0, 0, width, height, null);
+                g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
             }
             if(vidas == 0){
-                g.drawImage(Assets.gameOver, 0, 0, width, height, null);
-                Assets.music.stop();    
+                g.drawImage(Assets.gameOver, 0, 0, width, height, null);    // If no more lives are left, displays game over screen
+                Assets.music.stop();                                        // Stops the music
             }
             bs.show();
             g.dispose();
@@ -237,6 +262,9 @@ public class Game implements Runnable {
 
     }
     
+    /**
+     * Plays score sound when called 
+     */
     public void scoreSound(){
         Assets.score.play();
     }
@@ -266,6 +294,10 @@ public class Game implements Runnable {
         }
     }
     
+    /**
+     * to save the game
+     * @param strFileName 
+     */
     public void Save(String strFileName) {
 
         try {
@@ -282,8 +314,10 @@ public class Game implements Runnable {
 
     }
 
-    //Save Enemies
-
+    /**
+     * to load the saved game
+     * @param strFileName 
+     */
     public void Load(String strFileName) {
         try {
             FileReader file = new FileReader(strFileName);

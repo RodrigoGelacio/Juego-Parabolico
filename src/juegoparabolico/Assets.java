@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
  * @author antoniomejorado
  */
 public class Assets {
+<<<<<<< HEAD
     public static BufferedImage background; // to store background image
     public static BufferedImage player;     // to store the player image
     public static BufferedImage sprite;
@@ -23,8 +24,19 @@ public class Assets {
     public static BufferedImage building;
     public static SoundClip score;
     public static SoundClip music;
+=======
+    public static BufferedImage background;     // to store background image
+    public static BufferedImage player;         // to store the player image
+    public static BufferedImage sprite;         // to store coin spritesheet
+    public static BufferedImage pause;          // to store pause image
+    public static BufferedImage gameOver;       // to store game over image
+    public static BufferedImage spriteBasket;   // to store fountain sprite sheet
+    public static BufferedImage rotation1[];    // to store each image of the coin sprite sheet
+    public static SoundClip score;              // to store the score sound
+    public static SoundClip music;              // to store the background music sound
+    public static BufferedImage portal[];       // to store each image of the fountain sprite sheet
+>>>>>>> 02ff7ecce4844deb4d511bb610fa4d3ab6d67e3f
     
-public static BufferedImage portal[];
     /**
      * initializing the images of the game
      */
@@ -33,7 +45,6 @@ public static BufferedImage portal[];
         building = ImageLoader.loadImage("/images/building.png");
         score = new SoundClip("/sounds/score.wav");
         background = ImageLoader.loadImage("/images/park.png");
-        player = ImageLoader.loadImage("/images/ball.png");
         pause = ImageLoader.loadImage("/images/pause.jpg");
         gameOver = ImageLoader.loadImage("/images/gameover.jpg");
         sprite = ImageLoader.loadImage("/images/coin1.png");
@@ -43,10 +54,10 @@ public static BufferedImage portal[];
         rotation1 = new BufferedImage[6];
         portal = new BufferedImage[4];
         for(int i=0; i < 6; i++){
-            rotation1[i] = spritesheet.crop(i * 116, 0, 116, 146);
+            rotation1[i] = spritesheet.crop(i * 116, 0, 116, 146);  // crops images for the coin animation
         }
         for(int i = 0; i < 4; i++){
-            portal[i] = spritesheet2.crop(i * 170, 0, 170, 130);
+            portal[i] = spritesheet2.crop(i * 170, 0, 170, 130);    // crops images for the fountain animation
         }
     }
     

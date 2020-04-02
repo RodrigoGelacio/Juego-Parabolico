@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
  */
 
 /**
- *
- * @author Rodrigo
+ * @author SergioTapia
+ * @author RodrigoTorres
  */
 public class Animation {
  private int speed;     
