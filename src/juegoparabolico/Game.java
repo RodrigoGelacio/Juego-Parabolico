@@ -176,14 +176,14 @@ public class Game implements Runnable {
         keyManager.tick();
         ball.tick();
         basket.tick();
-        if (basket.collision(ball) && ! mouseManager.isIzquierdo()) {   //checks if the coin is inside the fountain
+        if (basket.collision(ball) && ! mouseManager.isIzquierdo()) {               // Checks if the coin is inside the fountain after being thrown
             score += 10;
-            ball.setControl(false);                 //sets gravity off after placiing
+            ball.setControl(false);                                                 // Sets gravity off after placiing
             ball.setBarrier(300);
-            ball.setX(getWidth() / 2);
-            ball.setY(getHeight() / 2);
-            scoreSound();
-            basket.setX((int) (Math.random() * ((width - 210) - 300 + 1) + 300));
+            ball.setX(getWidth() / 2);                                              // Places the coin in the middle
+            ball.setY(getHeight() / 2);                                             // Places the coin in the middle
+            scoreSound();                                                           // Plays sound after each score
+            basket.setX((int) (Math.random() * ((width - 210) - 300 + 1) + 300));   // Moves the fountain to another random location in the X axis but not interfering with the launch zone
         }
 
         if (counterVidas == 3) {
@@ -192,7 +192,7 @@ public class Game implements Runnable {
         }
 
         if (score % 50 == 0 && score != 0 && !vidaAsignada) {
-            extraVida = true; // turns bool to true if vidaAsignada is false
+            extraVida = true;       // turns bool to true if vidaAsignada is false
         }
 
         if (extraVida) {
@@ -220,18 +220,18 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.drawImage(Assets.background, 0, 0, width, height, null);  // Shows background
-            g.drawImage(Assets.building, 0, 0, 300, height, null);      // SHows building
+            g.drawImage(Assets.background, 0, 0, width, height, null);      // Shows background
+            g.drawImage(Assets.building, 0, 0, 300, height, null);          // Shows building
             ball.render(g);
             basket.render(g);
-            g.setFont(new Font("Tahoma", Font.BOLD, 20));           // Assigns a font to the upcoming setColor and drawString
-            g.setColor(Color.red);
-            g.drawString("Launch Zone", 50, height - 20);
-            g.setColor(Color.GREEN);                                    // Assigns a color to the pcoming drawString
-            g.drawString("Vidas: " + String.valueOf(vidas), 30, 30);   // Vidas is displayed on the upper left part of the screen
-            g.drawString("Score: " + String.valueOf(score), 30, 50);   // Score is displayed on the upper left part of the screen (below vidas)
+            g.setFont(new Font("Tahoma", Font.BOLD, 20));                   // Assigns a font to the upcoming setColor and drawString
+            g.setColor(Color.red);                                          //Assigns a color to the upcomig drawString
+            g.drawString("Launch Zone", 50, height - 20);                   // Shows Launch Zone in the building
+            g.setColor(Color.GREEN);                                        // Assigns a color to the pcoming drawString
+            g.drawString("Vidas: " + String.valueOf(vidas), 30, 30);        // Vidas is displayed on the upper left part of the screen
+            g.drawString("Score: " + String.valueOf(score), 30, 50);        // Score is displayed on the upper left part of the screen (below vidas)
             if (!keyManager.isPaused()) {
-                g.drawImage(Assets.pause, 0, 0, width, height, null); // If paused, displays the paused screen
+                g.drawImage(Assets.pause, 0, 0, width, height, null);       // If paused, displays the paused screen
             }
             if (vidas == 0) {
                 g.drawImage(Assets.gameOver, 0, 0, width, height, null);    // If no more lives are left, displays game over screen
